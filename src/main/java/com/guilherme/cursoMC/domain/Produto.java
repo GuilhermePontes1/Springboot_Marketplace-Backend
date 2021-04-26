@@ -15,7 +15,7 @@ import javax.persistence.ManyToMany;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
-public class Produto implements Serializable{
+public class Produto implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -24,22 +24,21 @@ public class Produto implements Serializable{
 	private Integer id;
 	private String nome;
 	private Double preco;
-	
-	@JsonBackReference// omite a lista de categorias, pois já está sendo buscada na parte de categorias.
+
+	@JsonBackReference // omite a lista de categorias, pois já está sendo buscada na parte de
+						// categorias.
 	@ManyToMany
-	@JoinTable (name = "PRODUTO_CATEGORIA", 
-	joinColumns = @JoinColumn(name = "produto_id"),	
-	inverseJoinColumns =  @JoinColumn (name = "categoria_id")) 
-	
-	// Basicamente aqui fazemos o mapeamento das tabelas se relacionando uma com a outra		
+	@JoinTable(name = "PRODUTO_CATEGORIA", joinColumns = @JoinColumn(name = "produto_id"), inverseJoinColumns = @JoinColumn(name = "categoria_id"))
+
+	// Basicamente aqui fazemos o mapeamento das tabelas se relacionando uma com a outra
 	// Quando se tem 2 tabelas com relação muito para muitos
-				// se cria uma terceira tabela no meio é isso que o ManyToMany faz
-				// em contrapartida o JoinTable insere os dados nessa essa tabela
-	
+	// se cria uma terceira tabela no meio é isso que o ManyToMany faz
+	// em contrapartida o JoinTable insere os dados nessa essa tabela
+
 	private List<Categoria> categorias = new ArrayList<>();
 
-	public  Produto() {
-		
+	public Produto() {
+
 	}
 
 	public Produto(Integer id, String nome, Double preco) {
@@ -105,5 +104,5 @@ public class Produto implements Serializable{
 			return false;
 		return true;
 	}
-	
+
 }
