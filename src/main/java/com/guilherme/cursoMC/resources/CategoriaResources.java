@@ -24,17 +24,10 @@ public class CategoriaResources {
 	
 	
 	public ResponseEntity<?> find(@PathVariable Integer id) {
-	Categoria obj = service.consultar(id); // procura o id a ser mostrada
 	
-//		List<Categoria> lista = new ArrayList<>();
-//		
-//		Categoria cat1 = new Categoria(1, "INFORMATICA");
-//		Categoria cat2 = new Categoria(2, "ESCRITORIO");
-//		Categoria cat3 = new Categoria(3, "ALIMENTO");   CÓDIGO PARA TESTE
-
+		Categoria obj = service.consultar(id); // procura o id a ser mostrada
 	
-		
-		//ResponseEntity é um objeto complexo, nesse caso ele responde ok e tem como corpo o OBJ
+	
 		return ResponseEntity.ok().body(obj);
 	}
 }
