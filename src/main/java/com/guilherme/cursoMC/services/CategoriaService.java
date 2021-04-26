@@ -28,6 +28,7 @@ public class CategoriaService {
 		new ObjectNotFoundException("Objeto não encontrado! Id: " + id + ", Tipo: " + Categoria.class.getName()));
 
 	// recebe um Integer como parametro, para então fazer a busca no banco de dados e retorna o objeto pronto
-		// se o objeto estiver vazio, ele retorna NULL
+		// se o objeto estiver vazio, ele retornaria anteriomente um NULL agora ele retorna o id + o tipo do erro além
+		// da "suposta categoria"
 	}
 }
