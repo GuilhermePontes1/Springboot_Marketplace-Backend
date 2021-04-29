@@ -1,8 +1,5 @@
 package com.guilherme.SpringBoot_Marketplace.domain;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 import javax.persistence.CollectionTable;
 import javax.persistence.ElementCollection;
@@ -37,6 +34,8 @@ public class Cliente {
 														 * problema que seria a repetição já que estou uma lista de
 														 * conjuntos
 														 */
+	@OneToMany(mappedBy = "cliente")
+	private List<Pedido> pedidos = new ArrayList<>();
 
 	public Cliente() {
 
@@ -51,6 +50,10 @@ public class Cliente {
 		this.tipo = tipo.getCod();	// Macete feito para transformar o tipo em NUMEROS no caso Integer, logo pro
 									// mundo externoo que fica é o nome, já no interno fica seu ID por isso ta sendo declarado como
 									// I	nteger!
+	}
+
+	public List<Pedido> getPedidos() {
+		return pedidos;
 	}
 
 	public Integer getId() {

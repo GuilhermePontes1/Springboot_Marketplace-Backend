@@ -1,26 +1,16 @@
 package com.guilherme.SpringBoot_Marketplace;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
+import com.guilherme.SpringBoot_Marketplace.domain.*;
+import com.guilherme.SpringBoot_Marketplace.domain.enums.EstadoPagamento;
+import com.guilherme.SpringBoot_Marketplace.domain.enums.TipoCliente;
+import com.guilherme.SpringBoot_Marketplace.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.guilherme.SpringBoot_Marketplace.domain.Categoria;
-import com.guilherme.SpringBoot_Marketplace.domain.Cidade;
-import com.guilherme.SpringBoot_Marketplace.domain.Cliente;
-import com.guilherme.SpringBoot_Marketplace.domain.Endereco;
-import com.guilherme.SpringBoot_Marketplace.domain.Estado;
-import com.guilherme.SpringBoot_Marketplace.domain.Produto;
-import com.guilherme.SpringBoot_Marketplace.domain.enums.TipoCliente;
-import com.guilherme.SpringBoot_Marketplace.repositories.CategoriaRepository;
-import com.guilherme.SpringBoot_Marketplace.repositories.CidadeRepository;
-import com.guilherme.SpringBoot_Marketplace.repositories.ClienteRepository;
-import com.guilherme.SpringBoot_Marketplace.repositories.EnderecoRepository;
-import com.guilherme.SpringBoot_Marketplace.repositories.EstadoRepository;
-import com.guilherme.SpringBoot_Marketplace.repositories.ProdutoRepository;
+import java.text.SimpleDateFormat;
+import java.util.Arrays;
 
 @SpringBootApplication
 public class SpringBoot_Marketplace implements CommandLineRunner {
@@ -37,6 +27,10 @@ public class SpringBoot_Marketplace implements CommandLineRunner {
 	private ClienteRepository clienteRepository;
 	@Autowired
 	private EnderecoRepository enderecoRepository;
+	@Autowired
+	private PedidoRepository pedidoRepository;
+	@Autowired
+	private PagamentoRepository pagamentoRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(SpringBoot_Marketplace.class, args);
@@ -91,7 +85,17 @@ public class SpringBoot_Marketplace implements CommandLineRunner {
 		enderecoRepository.saveAll(Arrays.asList(e1, e2));
 																// (MUITO IMPORTANTE), TEM UMA ORDEM A SER SEGUIDA E
 																// RESPEITADA NA HORA DE SALVAR AS LISTAS!
-		
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+		Pedido ped1 = new Pedido(null, sdf.parse("30/09/2021 10:32"), cli1, e1);
+		Pedido ped2 = new Pedido(null, sdf.parse("10/10/2021 19:35"), cli1, e2);
+		cli1.getPedidos().addAll(Arrays.asList(ped1, ped2));
+		Pagamento pagto1 = new PagamentoComCartao(null, EstadoPagamento.QUITADO, ped1, 6);
+		ped1.setPagamento(pagto1);
+		Pagamento pagto2 = new PagamentoComBoleto(null,EstadoPagamento.PENDENTE, ped2,sdf.parse("22/10/2021 00:00"),sdf.parse("22/10/2021 00:00"));
+		ped2.setPagamento(pagto2);
+
+		pedidoRepository.saveAll(Arrays.asList(ped1,ped2));
+		pagamentoRepository.saveAll(Arrays.asList(pagto1,pagto2));
 
 	}
 
