@@ -1,16 +1,16 @@
-package com.guilherme.cursoMC.repositories;
+package com.guilherme.SpringBoot_Marketplace.repositories;
 
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.guilherme.cursoMC.domain.Estado;
+import com.guilherme.SpringBoot_Marketplace.domain.Pedido;
 
 @Repository // REALIZA OPERAÇÃO DE ACESSO A DADOS REFERENTE AO OBJETO CATEGORIA QUE ESTÁ REFERENCIADO COM OBJETO
 //CATEGORIA
-public interface EstadoRepository extends JpaRepository<Estado, Integer> { 
+public interface PedidoRepository extends JpaRepository<Pedido, Integer> { 
 
-	Optional<Estado> findAllById(Integer id);
+	Optional<Pedido> findAllById(Integer id);
 
 }
