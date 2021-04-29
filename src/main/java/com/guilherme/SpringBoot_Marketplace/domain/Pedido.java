@@ -1,18 +1,12 @@
 package com.guilherme.SpringBoot_Marketplace.domain;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
-    @Entity
+import java.util.HashSet;
+import java.util.Set;
+
+@Entity
     public class Pedido implements Serializable {
         private static final long serialVersionUID = 1L;
 
@@ -38,6 +32,9 @@ import java.util.Date;
         @JoinColumn(name = "endereco_de_entrega_id")
         private Endereco enderecoDeEntrega;
 
+        @OneToMany(mappedBy = "id.pedido")
+        private Set<ItemPedido> itens = new HashSet<>();
+
         public Pedido () {
 
         }
@@ -51,8 +48,15 @@ import java.util.Date;
         }
 
 
+    public Set<ItemPedido> getItens() {
+        return itens;
+    }
 
-        public Integer getId() {
+    public void setItens(Set<ItemPedido> itens) {
+        this.itens = itens;
+    }
+
+    public Integer getId() {
             return id;
         }
 
