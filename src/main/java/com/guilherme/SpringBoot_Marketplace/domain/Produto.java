@@ -1,6 +1,6 @@
 package com.guilherme.SpringBoot_Marketplace.domain;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -20,8 +20,8 @@ public class Produto implements Serializable {
 	private String nome;
 	private Double preco;
 
-	@JsonBackReference // omite a lista de categorias, pois já está sendo buscada na parte de
-						// categorias.
+	  //@JsonBackReference // omite a lista de categorias, pois já está sendo buscada na parte de
+	@JsonIgnore             // categorias.
 	@ManyToMany
 	@JoinTable(name = "PRODUTO_CATEGORIA", joinColumns = @JoinColumn(name = "produto_id"), inverseJoinColumns = @JoinColumn(name = "categoria_id"))
 
@@ -32,6 +32,7 @@ public class Produto implements Serializable {
 
 	private List<Categoria> categorias = new ArrayList<>();
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "id.produto")
 	private Set<ItemPedido> itens = new HashSet<>();
 
@@ -45,7 +46,7 @@ public class Produto implements Serializable {
 		this.nome = nome;
 		this.preco = preco;
 	}
-
+	@JsonIgnore // Vai ter uma referencia ciclica por isso precisa ser ignorado
 	public List<Pedido> getPedidos (){       // Um produto deve conhecer os pediddos dele, por isso ele varre a lista de intes
 	List<Pedido> lista = new ArrayList<>();		// e então associa a pedidos
 		for (ItemPedido x: itens) {

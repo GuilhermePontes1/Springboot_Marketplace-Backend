@@ -1,5 +1,8 @@
 package com.guilherme.SpringBoot_Marketplace.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
@@ -14,9 +17,10 @@ import java.util.Set;
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         private Integer id;
 
-        @Temporal(TemporalType.TIMESTAMP)
+        @JsonFormat(pattern = "dd/MM/yyyy HH:mm")
         private Date instante;
 
+        // pedido pode ver cliente
         @OneToOne(cascade=CascadeType.ALL, mappedBy = "pedido")
        /*(cascade=CascadeType.ALL) É Necessário para não ocorrer erro de entidade intransiente quando for salva,
 	sempre que a entidade precisar ter o mesmo id da outra classe(nesse casos pedido) e por estar em 1 para 1

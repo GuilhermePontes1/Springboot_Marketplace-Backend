@@ -1,5 +1,7 @@
 package com.guilherme.SpringBoot_Marketplace.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import java.io.Serializable;
@@ -9,6 +11,7 @@ import java.util.Objects;
 public class ItemPedido implements Serializable {
     private static final long serialVersionUID = 1L;
 
+    @JsonIgnore // Não necessita ser serializado e nem pode
     @EmbeddedId
     private ItemPedidoPK id = new ItemPedidoPK();
 
@@ -28,10 +31,10 @@ public class ItemPedido implements Serializable {
         this.quantidade = quantidade;
         this.preco = preco;
     }
+    @JsonIgnore // tudo que começa com get tem q serializar por isso ignoramos
     public Pedido getPedido() {    // -> Ter acesso direto ao pedido e produto sem precisar antes ir para item pedido pk id
         return id.getPedido();      // melhorar a semântica da classe
     }
-
     public Produto getProduto(){
         return id.getProduto();
     } /// ->
