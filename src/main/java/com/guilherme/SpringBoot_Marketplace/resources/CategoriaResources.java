@@ -39,4 +39,9 @@ public class CategoriaResources {
 		obj = service.uptade(obj);
 		return ResponseEntity.noContent().build(); // Metodo para Atualizar Categoria!
 	}
- }
+	@RequestMapping(value = "{id}", method = RequestMethod.DELETE)
+	public ResponseEntity<Void> delete(@PathVariable Integer id) {
+		service.delete(id);
+		return ResponseEntity.noContent().build();
+	}
+}
