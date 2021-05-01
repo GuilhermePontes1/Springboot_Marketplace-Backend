@@ -34,7 +34,11 @@ public class CategoriaService {
 	}
 	public Categoria insert(Categoria obj) {
 		obj.setId(null);
-		return repo.save(obj);
+		return repo.save(obj); // Faz parte do metodo para inserir uma nova categoria
+	}
+	public Categoria uptade (Categoria obj) {
+		consultar (obj.getId());
+		return repo.save(obj); // Diferença fica na questão do id, quando ele se encontra nulo insere, quando não Atualiza os dados.
 	}
 
 }
