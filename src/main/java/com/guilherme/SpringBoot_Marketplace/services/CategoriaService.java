@@ -6,11 +6,13 @@ import com.guilherme.SpringBoot_Marketplace.services.exception.DataIntegrityExce
 import com.guilherme.SpringBoot_Marketplace.services.exception.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.zip.DataFormatException;
 
 @Service
 public class CategoriaService {
@@ -55,5 +57,11 @@ public class CategoriaService {
         }
     }public List<Categoria> findAll() {
         return repo.findAll(); // Metodo para listar todas categorias!
+    }
+
+    public Page<Categoria> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {
+        PageRequest pageRequest = PageRequest.of(page,linesPerPage, Sort.Direction.valueOf(direction),orderBy);
+        return repo.findAll(pageRequest); // Filtra as categorias de acordo com o usuário. Essa função funciona atravéz do uso do Page
+        // funcionalidade adicionada do Spring
     }
 }
