@@ -75,7 +75,6 @@ public class Cliente {
 		return TipoCliente.toEnum(tipo); // Macete feito para transformar o tipo em NUMEROS no caso Integer, logo pro
 											// mundo externoo que fica é o nome, já no interno fica seu ID!
 	}
-										
 
 	public List<Endereco> getEnderecos() {
 		return enderecos;

@@ -1,5 +1,6 @@
 package com.guilherme.SpringBoot_Marketplace.services;
 
+import com.guilherme.SpringBoot_Marketplace.CategoriaDTO.CategoriaDTO;
 import com.guilherme.SpringBoot_Marketplace.domain.Categoria;
 import com.guilherme.SpringBoot_Marketplace.repositories.CategoriaRepository;
 import com.guilherme.SpringBoot_Marketplace.services.exception.DataIntegrityException;
@@ -61,7 +62,11 @@ public class CategoriaService {
 
     public Page<Categoria> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {
         PageRequest pageRequest = PageRequest.of(page,linesPerPage, Sort.Direction.valueOf(direction),orderBy);
-        return repo.findAll(pageRequest); // Filtra as categorias de acordo com o usuário. Essa função funciona atravéz do uso do Page
+        return repo.findAll(pageRequest);
+        // Filtra as categorias de acordo com o usuário. Essa função funciona através do uso do Page, que faz a paginação
         // funcionalidade adicionada do Spring
+    }
+    public Categoria fromDTO(CategoriaDTO objDto) {
+        return new Categoria(objDto.getId(),objDto.getNome());
     }
 }

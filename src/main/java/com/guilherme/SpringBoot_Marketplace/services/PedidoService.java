@@ -13,9 +13,7 @@ public class PedidoService {
 
 	@Autowired
 	private PedidoRepository repo;
-	
 
-	
 	public Pedido
  consultar(Integer id) {
 		Optional<Pedido> obj = repo.findById(id);

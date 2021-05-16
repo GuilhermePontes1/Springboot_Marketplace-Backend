@@ -14,9 +14,7 @@ public class ClienteService {
 
 	@Autowired
 	private ClienteRepository repo;
-	
 
-	
 	public Cliente consultar(Integer id) {
 		Optional<Cliente> obj = repo.findById(id);
 		return obj.orElseThrow(() -> 
