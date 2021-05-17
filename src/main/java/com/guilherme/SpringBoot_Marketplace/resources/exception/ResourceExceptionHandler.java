@@ -4,6 +4,8 @@ import com.guilherme.SpringBoot_Marketplace.services.exception.DataIntegrityExce
 import com.guilherme.SpringBoot_Marketplace.services.exception.ObjectNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
@@ -28,6 +30,19 @@ public class ResourceExceptionHandler {
     public ResponseEntity<StandardError> DataIntegrity(DataIntegrityException e, HttpServletRequest request) {
 
         StandardError err = new StandardError(HttpStatus.BAD_REQUEST.value(), e.getMessage(), System.currentTimeMillis());
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(err); // aqui digitamos os tipos de erros que queremos que apareçam
+        // para o usuário
+    }
+
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<StandardError> validation(MethodArgumentNotValidException e, HttpServletRequest request) {
+
+        ValidationError err = new ValidationError(HttpStatus.BAD_REQUEST.value(), "Erro de validação", System.currentTimeMillis());
+
+        for(FieldError x : e.getBindingResult().getFieldErrors()){
+            err.addError(x.getField(),x.getDefaultMessage()); // procura os erros dentro do método "MethodArgumentNotValidException" adiciona eles a lista que irá ser mostrada
+        }
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(err);
     }
 }
