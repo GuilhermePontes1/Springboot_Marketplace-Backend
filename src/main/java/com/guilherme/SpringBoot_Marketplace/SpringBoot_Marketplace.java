@@ -82,7 +82,7 @@ public class SpringBoot_Marketplace implements CommandLineRunner {
 		cidadeRepository.saveAll(Arrays.asList(c1, c2, c3));
 
 		Cliente cli1 = new Cliente(null, "Marlene Pontes", "marlene@gmail.com", "724.487.335-20",
-				TipoCliente.PESSSOAFISICA);
+				TipoCliente.PESSSOA_FISICA);
 		cli1.getTelefones().addAll(Arrays.asList("98111444", "88895414"));
 
 		Endereco e1 = new Endereco(null, "Rua Jacaradá", "200", "apt 404", "Alphavile", "78559-217", cli1, c1);

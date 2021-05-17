@@ -46,7 +46,7 @@ public class Cliente {
 		this.nome = nome;                        
 		this.email = email;
 		this.cpfOuCnpj = cpfOuCnpj;
-		this.tipo = tipo.getCod();	// Macete feito para transformar o tipo em NUMEROS no caso Integer, logo pro
+		this.tipo = (tipo == null) ? null : tipo.getCod();	// Macete feito para transformar o tipo em NUMEROS no caso Integer, logo pro
 									// mundo externoo que fica é o nome, já no interno fica seu ID por isso ta sendo declarado como
 									// I	nteger!
 	}

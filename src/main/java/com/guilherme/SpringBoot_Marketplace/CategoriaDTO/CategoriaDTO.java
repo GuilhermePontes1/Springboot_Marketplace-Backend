@@ -16,13 +16,15 @@ public class CategoriaDTO implements Serializable {
     private String nome;
 
 
+    public CategoriaDTO() {
+
+    }
+
     public CategoriaDTO (Categoria obj) {
         id = obj.getId();
         nome = obj.getNome();
     }
-    public CategoriaDTO(){
 
-    }
 
     public Integer getId() {
         return id;
