@@ -2,6 +2,7 @@ package com.guilherme.SpringBoot_Marketplace.services;
 
 import com.guilherme.SpringBoot_Marketplace.CategoriaDTO.CategoriaDTO;
 import com.guilherme.SpringBoot_Marketplace.domain.Categoria;
+import com.guilherme.SpringBoot_Marketplace.domain.Cliente;
 import com.guilherme.SpringBoot_Marketplace.repositories.CategoriaRepository;
 import com.guilherme.SpringBoot_Marketplace.services.exception.DataIntegrityException;
 import com.guilherme.SpringBoot_Marketplace.services.exception.ObjectNotFoundException;
@@ -42,11 +43,13 @@ public class CategoriaService {
     public Categoria insert(Categoria obj) {
         obj.setId(null);
         return repo.save(obj); // Faz parte do metodo para inserir uma nova categoria
+
     }
 
     public Categoria uptade(Categoria obj) {
-        consultar(obj.getId());
-        return repo.save(obj); // Diferença fica na questão do id, quando ele se encontra nulo insere, quando não Atualiza os dados.
+        Categoria newObj =  consultar(obj.getId());
+        uptadeData(newObj, obj);
+        return repo.save(newObj); // Diferença fica na questão do id, quando ele se encontra nulo insere, quando não Atualiza os dados.
     }
 
     public void delete(Integer id) {
@@ -69,4 +72,9 @@ public class CategoriaService {
     public Categoria fromDTO(CategoriaDTO objDto) {
         return new Categoria(objDto.getId(),objDto.getNome());
     }
+    private void uptadeData(Categoria newObj, Categoria obj) {
+        newObj.setNome(obj.getNome());
+         // atualiza para novos valores e busca conforme o usuário
+    }
+
 }

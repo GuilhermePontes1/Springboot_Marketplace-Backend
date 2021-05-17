@@ -39,7 +39,7 @@ public class ClienteService {
 		try {
 			repo.deleteById(id);
 		} catch (DataIntegrityViolationException e) {
-			throw new DataIntegrityException("Não é possível exclui pois a entidades relacionadas");
+			throw new DataIntegrityException("Não é possível exclui pois a	 entidades relacionadas");
 		}
 	}public List<Cliente> findAll() {
 		return repo.findAll(); // Metodo para listar todas categorias!
