@@ -21,7 +21,7 @@ public class Cliente {
 	private Integer tipo;
 	
 
-	@OneToMany(mappedBy = "cliente")
+	@OneToMany(mappedBy = "cliente" ,cascade = CascadeType.ALL	)// ex: se eu apagar os clientes apago junto seus endereços, isso se chama efeito "Cascata")
 	private List<Endereco> enderecos = new ArrayList<>();
 
 	@ElementCollection
