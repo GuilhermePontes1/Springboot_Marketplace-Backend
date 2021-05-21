@@ -1,14 +1,19 @@
 package com.guilherme.SpringBoot_Marketplace.resources;
 
+import com.guilherme.SpringBoot_Marketplace.CategoriaDTO.CategoriaDTO;
 import com.guilherme.SpringBoot_Marketplace.CategoriaDTO.ClienteDTO;
+import com.guilherme.SpringBoot_Marketplace.CategoriaDTO.ClienteNewDTO;
+import com.guilherme.SpringBoot_Marketplace.domain.Categoria;
 import com.guilherme.SpringBoot_Marketplace.domain.Cliente;
 import com.guilherme.SpringBoot_Marketplace.services.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
+import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -35,18 +40,24 @@ public class ClienteResources {
         obj = service.uptade(obj);
         return ResponseEntity.noContent().build(); // Metodo para Atualizar Cliente! = PUT!
     }
-
+    @RequestMapping(method = RequestMethod.POST) //RequestBody faz o json ser convertido para objeto java
+    public ResponseEntity<Void> insert(@Valid @RequestBody ClienteNewDTO objDto) { //@Valid serve para validação do objeto, para se fazer um filtro do que deve ser colocado
+        Cliente obj = service.fromDTO(objDto);
+        obj = service.insert(obj);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
+        return ResponseEntity.created(uri).build();  // metodo para inserir novos clientes! = POST
+    }
     @RequestMapping(value = "{id}", method = RequestMethod.DELETE)
     public ResponseEntity<Void> delete(@PathVariable Integer id) {
         service.delete(id);
-        return ResponseEntity.noContent().build(); // Deletar categorias = DELETE
+        return ResponseEntity.noContent().build(); // Deletar cliente = DELETE
     }
 
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<List<ClienteDTO>> findAll() {
-        List<Cliente> list = service.findAll(); // procura TODOS os ids parra ser mostrados todas categorias
+        List<Cliente> list = service.findAll(); // procura TODOS os ids parra ser mostrados todos clientes
         List<ClienteDTO> listDto = list.stream().map(obj -> new ClienteDTO(obj)).collect(Collectors.toList());
-        // Converte a lista categoria para categoriaDto, isso serve para limitar o que  categoria mostra apenas a ela mesma
+        // Converte a lista cliente para clienteDto, isso serve para limitar o que  categoria mostra apenas a ela mesma
         // e não a categoria e produtos que nesse caso seria errado devido o requisitos do projeto
         return ResponseEntity.ok().body(listDto);
     }
