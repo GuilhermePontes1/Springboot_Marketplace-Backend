@@ -6,6 +6,7 @@ import com.guilherme.SpringBoot_Marketplace.domain.enums.TipoCliente;
 import com.guilherme.SpringBoot_Marketplace.repositories.ClienteRepository;
 import com.guilherme.SpringBoot_Marketplace.resources.exception.FieldMessage;
 import com.guilherme.SpringBoot_Marketplace.services.validation.utils.BR;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +15,7 @@ import javax.validation.ConstraintValidatorContext;
 
 public class ClienteInsetValidator implements ConstraintValidator<ClienteInsert, ClienteNewDTO> {
 
+    @Autowired
     private ClienteRepository repo;
 
     @Override

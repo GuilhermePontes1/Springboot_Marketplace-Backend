@@ -19,6 +19,7 @@ public class Cliente {
 
 	@Column(unique = true)
 	private String email;
+
 	private String cpfOuCnpj;
 	private Integer tipo;
 	

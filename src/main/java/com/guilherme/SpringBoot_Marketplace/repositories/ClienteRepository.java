@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 //CATEGORIA
 public interface ClienteRepository extends JpaRepository<Cliente, Integer> { 
 
-	Optional<Cliente> findAllById(Integer id); // para realização de testes
+//	Optional<Cliente> findAllById(Integer id); // para realização de testes
 
 	@Transactional(readOnly = true) // Ela não necessita ser envolvida como uma transação de banco de dados e optimiza o desempenho do código
 	Cliente findByEmail(String email);
