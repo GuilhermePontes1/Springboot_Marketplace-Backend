@@ -1,14 +1,17 @@
 package com.guilherme.SpringBoot_Marketplace.CategoriaDTO;
 
 import com.guilherme.SpringBoot_Marketplace.domain.Cliente;
+import com.guilherme.SpringBoot_Marketplace.services.validation.ClienteUpdate;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 
+@ClienteUpdate // Anotação criada paa validação do email do cliente
 public class ClienteDTO implements Serializable {
     private static final long serialVersionUID = 1L;
+
 
     private Integer id;
     @NotEmpty(message = "Preenchimento obrigatório!!")
