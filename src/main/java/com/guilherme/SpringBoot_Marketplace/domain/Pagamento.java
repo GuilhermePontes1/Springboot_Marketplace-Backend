@@ -1,15 +1,10 @@
 package com.guilherme.SpringBoot_Marketplace.domain;
-import java.io.Serializable;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
-import javax.persistence.JoinColumn;
-import javax.persistence.MapsId;
-import javax.persistence.OneToOne;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.guilherme.SpringBoot_Marketplace.domain.enums.EstadoPagamento;
+
+import javax.persistence.*;
+import java.io.Serializable;
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 /* Quando se trabalha com Herança de produtos os resultados deles são organizados de 2 maneiras, uma em tabela unica(SINGLE.TABLE) outra
@@ -22,7 +17,7 @@ public abstract class  Pagamento implements Serializable {
         private Integer id;
         private Integer estado;
 
-        @JsonBackReference// Pagamento não pode ver pedidos
+        @JsonIgnore// Pagamento não pode ver pedidos
         @OneToOne
         @JoinColumn(name = "pedido_id")
         @MapsId
