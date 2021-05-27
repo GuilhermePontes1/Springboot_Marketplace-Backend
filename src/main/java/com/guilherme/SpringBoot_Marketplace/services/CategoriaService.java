@@ -1,8 +1,7 @@
 package com.guilherme.SpringBoot_Marketplace.services;
 
-import com.guilherme.SpringBoot_Marketplace.CategoriaDTO.CategoriaDTO;
+import com.guilherme.SpringBoot_Marketplace.dto.CategoriaDTO;
 import com.guilherme.SpringBoot_Marketplace.domain.Categoria;
-import com.guilherme.SpringBoot_Marketplace.domain.Cliente;
 import com.guilherme.SpringBoot_Marketplace.repositories.CategoriaRepository;
 import com.guilherme.SpringBoot_Marketplace.services.exception.DataIntegrityException;
 import com.guilherme.SpringBoot_Marketplace.services.exception.ObjectNotFoundException;
@@ -29,7 +28,7 @@ public class CategoriaService {
 
 	*/
 
-    public Categoria consultar(Integer id) {
+    public Categoria find(Integer id) {
         Optional<Categoria> obj = repo.findById(id);
         return obj.orElseThrow(() ->
                 new ObjectNotFoundException("Objeto não encontrado! Id: " + id + ", Tipo: " + Categoria.class.getName()));
@@ -47,13 +46,13 @@ public class CategoriaService {
     }
 
     public Categoria uptade(Categoria obj) {
-        Categoria newObj =  consultar(obj.getId());
+        Categoria newObj =  find(obj.getId());
         uptadeData(newObj, obj);
         return repo.save(newObj); // Diferença fica na questão do id, quando ele se encontra nulo insere, quando não Atualiza os dados.
     }
 
     public void delete(Integer id) {
-        consultar(id);
+        find(id);
         try {
             repo.deleteById(id);
         } catch (DataIntegrityViolationException e) {

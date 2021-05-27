@@ -1,7 +1,7 @@
 package com.guilherme.SpringBoot_Marketplace.resources;
 
 
-import com.guilherme.SpringBoot_Marketplace.CategoriaDTO.CategoriaDTO;
+import com.guilherme.SpringBoot_Marketplace.dto.CategoriaDTO;
 import com.guilherme.SpringBoot_Marketplace.domain.Categoria;
 import com.guilherme.SpringBoot_Marketplace.services.CategoriaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +27,7 @@ public class CategoriaResources {
 
     public ResponseEntity<Categoria> find(@PathVariable Integer id) {
 
-        Categoria obj = service.consultar(id); // procura o id a ser mostrada
+        Categoria obj = service.find(id); // procura o id a ser mostrada
         return ResponseEntity.ok().body(obj);
     }
 

@@ -1,4 +1,4 @@
-package com.guilherme.SpringBoot_Marketplace.CategoriaDTO;
+package com.guilherme.SpringBoot_Marketplace.dto;
 
 import com.guilherme.SpringBoot_Marketplace.domain.Produto;
 

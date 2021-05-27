@@ -1,6 +1,6 @@
 package com.guilherme.SpringBoot_Marketplace.services.validation;
 
-import com.guilherme.SpringBoot_Marketplace.CategoriaDTO.ClienteDTO;
+import com.guilherme.SpringBoot_Marketplace.dto.ClienteDTO;
 import com.guilherme.SpringBoot_Marketplace.domain.Cliente;
 import com.guilherme.SpringBoot_Marketplace.repositories.ClienteRepository;
 import com.guilherme.SpringBoot_Marketplace.resources.exception.FieldMessage;

@@ -1,9 +1,7 @@
 package com.guilherme.SpringBoot_Marketplace.resources;
 
-import com.guilherme.SpringBoot_Marketplace.CategoriaDTO.CategoriaDTO;
-import com.guilherme.SpringBoot_Marketplace.CategoriaDTO.ClienteDTO;
-import com.guilherme.SpringBoot_Marketplace.CategoriaDTO.ClienteNewDTO;
-import com.guilherme.SpringBoot_Marketplace.domain.Categoria;
+import com.guilherme.SpringBoot_Marketplace.dto.ClienteDTO;
+import com.guilherme.SpringBoot_Marketplace.dto.ClienteNewDTO;
 import com.guilherme.SpringBoot_Marketplace.domain.Cliente;
 import com.guilherme.SpringBoot_Marketplace.services.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +27,7 @@ public class ClienteResources {
 
     public ResponseEntity<Cliente> find(@PathVariable Integer id) {
 
-        Cliente obj = service.consultar(id); // procura o id a ser mostrada
+        Cliente obj = service.find(id); // procura o id a ser mostrada
         return ResponseEntity.ok().body(obj);
     }
 

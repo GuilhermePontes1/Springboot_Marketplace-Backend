@@ -3,8 +3,8 @@ package com.guilherme.SpringBoot_Marketplace.services;
 import java.util.List;
 import java.util.Optional;
 
-import com.guilherme.SpringBoot_Marketplace.CategoriaDTO.ClienteDTO;
-import com.guilherme.SpringBoot_Marketplace.CategoriaDTO.ClienteNewDTO;
+import com.guilherme.SpringBoot_Marketplace.dto.ClienteDTO;
+import com.guilherme.SpringBoot_Marketplace.dto.ClienteNewDTO;
 import com.guilherme.SpringBoot_Marketplace.domain.Cidade;
 import com.guilherme.SpringBoot_Marketplace.domain.Cliente;
 import com.guilherme.SpringBoot_Marketplace.domain.Endereco;
@@ -30,7 +30,7 @@ public class ClienteService {
 	@Autowired
 	private EnderecoRepository enderecoRepository;
 
-	public Cliente consultar(Integer id) {
+	public Cliente find(Integer id) {
 		Optional<Cliente> obj = repo.findById(id);
 		return obj.orElseThrow(() -> 
 		new ObjectNotFoundException("Objeto não encontrado! Id: " + id + ", Tipo: " + Cliente.class.getName()));
@@ -47,13 +47,13 @@ public class ClienteService {
 	}
 
 	public Cliente uptade(Cliente obj) {
-		Cliente newObj =  consultar(obj.getId());
+		Cliente newObj =  find(obj.getId());
 		uptadeData(newObj, obj);
 		return repo.save(newObj); // Diferença fica na questão do id, quando ele se encontra nulo insere, quando não Atualiza os dados.
 	}
 
 	public void delete(Integer id) {
-		consultar(id);
+		find(id);
 		try {
 			repo.deleteById(id);
 		} catch (DataIntegrityViolationException e) {

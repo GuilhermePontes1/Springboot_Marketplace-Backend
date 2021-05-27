@@ -1,15 +1,17 @@
 package com.guilherme.SpringBoot_Marketplace.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.guilherme.SpringBoot_Marketplace.domain.enums.EstadoPagamento;
 
 import javax.persistence.*;
 import java.io.Serializable;
-@Entity
-@Inheritance(strategy = InheritanceType.JOINED)
 /* Quando se trabalha com Herança de produtos os resultados deles são organizados de 2 maneiras, uma em tabela unica(SINGLE.TABLE) outra
  * em tabela unitaria, a tabela unica ganho mais perfomace dependendo do service a ser feito, porém quando se tem diversas subclasses
  * se utiliza tabelas unicas para cada caso de compra(JOINED)*/
+@Entity
+@Inheritance(strategy = InheritanceType.JOINED)
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "@type") // permite a instanciação de subclasses a partir de dados JSON
 public abstract class  Pagamento implements Serializable {
         private static final long serialVersionUID = 1L;
 

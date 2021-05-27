@@ -1,6 +1,7 @@
 package com.guilherme.SpringBoot_Marketplace.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.guilherme.SpringBoot_Marketplace.domain.enums.EstadoPagamento;
 
 import javax.persistence.Entity;
@@ -9,6 +10,7 @@ import javax.persistence.TemporalType;
 import java.util.Date;
 
 @Entity
+@JsonTypeName("pagamentoComBoleto")
 public class PagamentoComBoleto extends Pagamento{
 	private static final long serialVersionUID = 1L;
 

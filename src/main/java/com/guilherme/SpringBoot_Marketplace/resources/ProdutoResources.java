@@ -2,10 +2,9 @@ package com.guilherme.SpringBoot_Marketplace.resources;
 
 import java.util.List;
 
-import com.guilherme.SpringBoot_Marketplace.CategoriaDTO.ProdutoDTO;
+import com.guilherme.SpringBoot_Marketplace.dto.ProdutoDTO;
 import com.guilherme.SpringBoot_Marketplace.domain.Produto;
 import com.guilherme.SpringBoot_Marketplace.services.ProdutoService;
-import com.guilherme.SpringBoot_Marketplace.repositories.ProdutoRepository;
 import com.guilherme.SpringBoot_Marketplace.resources.utils.URL;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

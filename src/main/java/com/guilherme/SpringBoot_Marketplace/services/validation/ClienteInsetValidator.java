@@ -1,6 +1,6 @@
 package com.guilherme.SpringBoot_Marketplace.services.validation;
 
-import com.guilherme.SpringBoot_Marketplace.CategoriaDTO.ClienteNewDTO;
+import com.guilherme.SpringBoot_Marketplace.dto.ClienteNewDTO;
 import com.guilherme.SpringBoot_Marketplace.domain.Cliente;
 import com.guilherme.SpringBoot_Marketplace.domain.enums.TipoCliente;
 import com.guilherme.SpringBoot_Marketplace.repositories.ClienteRepository;
