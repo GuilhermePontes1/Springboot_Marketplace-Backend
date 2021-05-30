@@ -11,6 +11,5 @@ import com.guilherme.SpringBoot_Marketplace.domain.Endereco;
 //CATEGORIA
 public interface EnderecoRepository extends JpaRepository<Endereco, Integer> { 
 
-	Optional<Endereco> findAllById(Integer id);
 
 }

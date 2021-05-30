@@ -10,6 +10,5 @@ import java.util.Optional;
 //CATEGORIA
 public interface ItemPedidoRepository extends JpaRepository<ItemPedido, Integer> {
 
-	Optional<ItemPedido> findAllById(Integer id);
 
 }

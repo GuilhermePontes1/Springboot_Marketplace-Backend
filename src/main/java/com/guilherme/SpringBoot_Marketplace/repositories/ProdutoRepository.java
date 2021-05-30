@@ -1,11 +1,7 @@
 package com.guilherme.SpringBoot_Marketplace.repositories;
 
 import java.util.List;
-import java.util.Optional;
-
 import com.guilherme.SpringBoot_Marketplace.domain.Categoria;
-import com.guilherme.SpringBoot_Marketplace.domain.Endereco;
-import com.guilherme.SpringBoot_Marketplace.domain.ItemPedido;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

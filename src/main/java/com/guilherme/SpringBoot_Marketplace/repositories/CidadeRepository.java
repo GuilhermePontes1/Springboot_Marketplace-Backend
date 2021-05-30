@@ -11,6 +11,5 @@ import com.guilherme.SpringBoot_Marketplace.domain.Cidade;
 //CATEGORIA
 public interface CidadeRepository extends JpaRepository<Cidade, Integer> { 
 
-	Optional<Cidade> findAllById(Integer id);
 
 }

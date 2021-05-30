@@ -11,6 +11,4 @@ import com.guilherme.SpringBoot_Marketplace.domain.Pedido;
 //CATEGORIA
 public interface PedidoRepository extends JpaRepository<Pedido, Integer> { 
 
-	Optional<Pedido> findAllById(Integer id);
-
 }

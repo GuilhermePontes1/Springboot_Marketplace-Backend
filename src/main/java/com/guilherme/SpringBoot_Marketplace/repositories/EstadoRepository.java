@@ -11,6 +11,5 @@ import com.guilherme.SpringBoot_Marketplace.domain.Estado;
 //CATEGORIA
 public interface EstadoRepository extends JpaRepository<Estado, Integer> { 
 
-	Optional<Estado> findAllById(Integer id);
 
 }
