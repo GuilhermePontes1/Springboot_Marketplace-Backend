@@ -9,8 +9,10 @@
    
    /categorias/(de 1 a 7)
    /categorias  para ver todos  
+  
    /categorias/1 para expecificar 
-   /categorias/page para paginarr
+  
+   /categorias/page para paginar
    
    /clientes para ver a lista de clientes 
    /clientes/1  para expecificar
