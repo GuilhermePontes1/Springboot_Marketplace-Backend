@@ -3,7 +3,7 @@
 
 2º UPTADE: Utilizando: Maven para para baixar as dependencias dos arquivos necessários, H2 Como banco teste antes de migrar para o MySQL ou postgreSQL, como teste utilizo o postman
 
-3º UPTADE : https://spring-marketplace.herokuapp.com/ LOCAL onde se localiza o backend da aplicação 
+3º UPTADE : https://spring-marketplace.herokuapp.com/ local onde se localiza o backend da aplicação 
    Os comandos são: 
    
    /categorias/(de 1 a 7)
