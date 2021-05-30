@@ -20,4 +20,7 @@
    pedidos/(de 1 a 2) para ver a lista de pedidos
    
    
+   OBS: CRUD já implementado!
+   
+   
    
