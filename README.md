@@ -5,7 +5,7 @@
 
 3º UPDATE : https://spring-marketplace.herokuapp.com/ local onde se localiza o backend da aplicação. (Pronto)
    
-   ### Os comandos são: 
+   #### Os comandos são: 
    
    /categorias/(de 1 a 7)
    /categorias  para ver todos  
