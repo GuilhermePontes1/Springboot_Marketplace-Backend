@@ -1,9 +1,12 @@
 # Springboot_Marketplace
-1º UPDATE: Criando um Marketplace em Java através do Spring Boot e diversas tecnologias, irei atualizando o readme sobre as tecnologias utilizadas durante a construção do projeto
+### 1º UPDATE: 
+Criando um Marketplace em Java através do Spring Boot e diversas tecnologias, irei atualizando o readme sobre as tecnologias utilizadas durante a construção do projeto
 
-2º UPDATE: Utilizando: Maven para para baixar as dependencias dos arquivos necessários, H2 Como banco teste antes de migrar para o MySQL ou postgreSQL, como teste utilizo o postman
+### 2º UPDATE: 
+Utilizando: Maven para para baixar as dependencias dos arquivos necessários, H2 Como banco teste antes de migrar para o MySQL ou postgreSQL, como teste utilizo o postman
 
-3º UPDATE : https://spring-marketplace.herokuapp.com/ local onde se localiza o backend da aplicação. (Pronto)
+### 3º UPDATE: 
+https://spring-marketplace.herokuapp.com/ local onde se localiza o backend da aplicação, escolhi o mySQL como banco para essa aplicação (Pronto)
    
    #### Os comandos são: 
    
@@ -21,7 +24,9 @@
   
    OBS: CRUD já implementado!
    
-   4º UPDATE: Melhorar desempenho e implementar Tokens e serviços de email! (Estou nessa etapa!)
+ ### 4º UPDATE: 
+   Melhorar desempenho e implementar Tokens e serviços de email! (Estou nessa etapa!)
    
-   5º UPDATE: Para o frontend utilizarei IONIC para que a loja seja também implementando em dispositivos movéis(A fazer)
+ ### 5º UPDATE: 
+   Para o frontend utilizarei IONIC para que a loja seja também implementando em dispositivos movéis(A fazer)
    
