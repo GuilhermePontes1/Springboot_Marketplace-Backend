@@ -18,6 +18,7 @@
    /clientes/1  para expecificar
    
    pedidos/(de 1 a 2) para ver a lista de pedidos
+  
    OBS: CRUD já implementado!
    
    4º UPDATE: Melhorar desempenho e implementar Tokens e serviços de email! (Estou nessa etapa!)
