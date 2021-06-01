@@ -25,7 +25,7 @@ https://spring-marketplace.herokuapp.com/ local onde se localiza o backend da ap
    OBS: CRUD já implementado! :white_check_mark:	
    
  ### 4º UPDATE: 
-   Melhorar desempenho e implementar Tokens e serviços de email! (Estou nessa etapa!)
+   Melhorar desempenho e implementar Tokens e serviços de email! (Estou nessa etapa!) :construction:	
    
  ### 5º UPDATE: 
    Para o frontend utilizarei IONIC para que a loja seja também implementando em dispositivos movéis(A fazer)
