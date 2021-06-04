@@ -3,7 +3,9 @@ package com.guilherme.SpringBoot_Marketplace.config;
 import com.guilherme.SpringBoot_Marketplace.services.DBService;
 import com.guilherme.SpringBoot_Marketplace.services.EmailService;
 import com.guilherme.SpringBoot_Marketplace.services.MockEmailService;
+import com.guilherme.SpringBoot_Marketplace.services.SmtEmailService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -14,6 +16,8 @@ import java.text.ParseException;
 @Profile("test")
 public class TestConfig {
 
+
+
     @Autowired
     private DBService dbService;
 
@@ -23,8 +27,9 @@ public class TestConfig {
         return true;
     }
 
+
     @Bean
-    public EmailService emailService() {
+    public EmailService emailService () {
         return new MockEmailService();
     }
 }

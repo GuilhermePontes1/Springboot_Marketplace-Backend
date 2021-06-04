@@ -1,5 +1,7 @@
 package com.guilherme.SpringBoot_Marketplace.config;
 import com.guilherme.SpringBoot_Marketplace.services.DBService;
+import com.guilherme.SpringBoot_Marketplace.services.EmailService;
+import com.guilherme.SpringBoot_Marketplace.services.SmtEmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -29,5 +31,11 @@ public class DevConfig {
         dbService.instantiateTestDatabase();
         return true;
     }
+
+    @Bean
+    public EmailService emailService () {
+        return new SmtEmailService();
+    }
+
 }
 // Classe criada para configuração de banco de dados
