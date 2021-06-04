@@ -4,8 +4,11 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.Locale;
 import java.util.Set;
 
 @Entity
@@ -130,7 +133,27 @@ import java.util.Set;
             return true;
         }
 
-
+    @Override
+    public String toString() {
+        NumberFormat nf = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyy hh:mm:ss");
+        final StringBuilder builder = new StringBuilder();
+        builder.append("Pedido número: ");
+        builder.append(getId());
+        builder.append(",Instante: ");
+        builder.append(sdf.format(getInstante()));
+        builder.append(",Cliente: ");
+        builder.append(getCliente().getNome());
+        builder.append(", Situação do pagamento");
+        builder.append(getPagamento().getEstado().getDescricao());
+        builder.append("\nDetalhes:\n");
+        for (ItemPedido ip: getItens()){
+            builder.append(ip.toString());
+        }
+        builder.append("Valor total: ");
+        builder.append(nf.format(getValorTotal()));
+        return builder.toString();
     }
+}
 
 

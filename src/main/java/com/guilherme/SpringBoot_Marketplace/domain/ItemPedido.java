@@ -6,6 +6,7 @@ import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import java.io.Serializable;
 import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
 import java.util.Locale;
 
 @Entity
@@ -102,6 +103,15 @@ public class ItemPedido implements Serializable {
         return true;
     }
 
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((id == null) ? 0 : id.hashCode());
+        return result;
+    }
+
     @Override
     public String toString() {
         NumberFormat nf = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
@@ -115,13 +125,5 @@ public class ItemPedido implements Serializable {
         builder.append(nf.format(getSubTotal()));
         builder.append("\n");
         return builder.toString();
-    }
-
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((id == null) ? 0 : id.hashCode());
-        return result;
     }
 }
