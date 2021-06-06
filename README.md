@@ -27,7 +27,7 @@ https://spring-marketplace.herokuapp.com/ local onde se localiza o backend da ap
    Serviços de email! :white_check_mark:
    
  ### 7º UPDATE: 
-   implementar Tokens e segurança! (Estou nessa etapa!) :construction:
+   implementar Tokens e aprimorar segurança! (Estou nessa etapa!) :construction:
    
  ### 8º UPDATE: 
    Armazenamento de imagem com Amazon S3
