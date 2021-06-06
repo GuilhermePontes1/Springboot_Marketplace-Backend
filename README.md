@@ -8,8 +8,7 @@ Utilizando: Maven para para baixar as dependencias dos arquivos necessários, H2
 ### 3º UPDATE: 
 https://spring-marketplace.herokuapp.com/ local onde se localiza o backend da aplicação, adotei o MySQL como banco para essa aplicação :white_check_mark:	
    
-### 4º UPDATE: 
-  CRUD (GET, POST PUT, DELETE) já implementado ! :white_check_mark:
+### 4º UPDATE: Comandos do Backend
          
   ### Os comandos são: 
 
@@ -20,19 +19,19 @@ https://spring-marketplace.herokuapp.com/ local onde se localiza o backend da ap
 |  /clientes          | /cliente/1          |
 |  /pedidos           | /pedidos (de 1 a 2) |
   
- ### 4º UPDATE: 
+ ### 5º UPDATE: 
   CRUD (GET, POST PUT, DELETE) já implementado ! :white_check_mark:
    
    
- ### 5º UPDATE: 
+ ### 6º UPDATE: 
    Serviços de email! (Estou nessa etapa!) :construction:	
    
- ### 6º UPDATE: 
+ ### 7º UPDATE: 
    implementar Tokens
    
- ### 7º UPDATE: 
+ ### 8º UPDATE: 
    Armazenamento de imagem com Amazon S3
    
- ### 8º UPDATE: 
+ ### 9º UPDATE: 
    Para o frontend utilizarei IONIC, para que a loja seja também implementando em dispositivos movéis(A fazer)
    
