@@ -36,7 +36,8 @@ https://spring-marketplace.herokuapp.com/ local onde se localiza o backend da ap
    Para o frontend utilizarei IONIC, para que a loja seja também implementando em dispositivos movéis(A fazer)
    
    ## DIAGRAMA DO PROJETO
-![image](https://user-images.githubusercontent.com/65747791/120947233-694fa500-c715-11eb-8b12-658dfdb5a307.png)
+![image](https://user-images.githubusercontent.com/65747791/120947499-23471100-c716-11eb-828e-158f6224103d.png)
+
 
 
 
