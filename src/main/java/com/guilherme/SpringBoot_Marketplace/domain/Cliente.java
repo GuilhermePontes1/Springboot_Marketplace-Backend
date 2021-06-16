@@ -22,7 +22,9 @@ public class Cliente {
 
 	private String cpfOuCnpj;
 	private Integer tipo;
-	
+
+	@JsonIgnore
+	private String senha;
 
 	@OneToMany(mappedBy = "cliente" ,cascade = CascadeType.ALL	)// ex: se eu apagar os clientes apago junto seus endereços, isso se chama efeito "Cascata")
 	private List<Endereco> enderecos = new ArrayList<>();
@@ -43,15 +45,24 @@ public class Cliente {
 
 	}
 
-	public Cliente(Integer id, String nome, String email, String cpfOuCnpj, TipoCliente tipo) {              
+	public Cliente(Integer id, String nome, String email, String cpfOuCnpj, TipoCliente tipo, String senha) {
 		super();
+		this.senha = senha;
 		this.id = id;
 		this.nome = nome;                        
 		this.email = email;
 		this.cpfOuCnpj = cpfOuCnpj;
-		this.tipo = (tipo == null) ? null : tipo.getCod();	// Macete feito para transformar o tipo em NUMEROS no caso Integer, logo pro
-									// mundo externoo que fica é o nome, já no interno fica seu ID por isso ta sendo declarado como
-									// I	nteger!
+		this.tipo = (tipo == null) ? null : tipo.getCod();	/* Macete feito para transformar o tipo em NUMEROS, no caso Integer, logo pro
+															  mundo externo oque fica é o nome, já no interno fica seu ID, por isso esta sendo declarado como
+															  Integer!  */
+	}
+
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
 	}
 
 	public List<Pedido> getPedidos() {
@@ -75,8 +86,8 @@ public class Cliente {
 	}
 
 	public TipoCliente getTipo() {
-		return TipoCliente.toEnum(tipo); // Macete feito para transformar o tipo em NUMEROS no caso Integer, logo pro
-											// mundo externoo que fica é o nome, já no interno fica seu ID!
+		return TipoCliente.toEnum(tipo); /* Macete feito para transformar o tipo em NUMEROS no caso Integer, logo pro
+											 mundo externoo que fica é o nome, já no interno fica seu ID! */
 	}
 
 	public List<Endereco> getEnderecos() {
@@ -104,9 +115,9 @@ public class Cliente {
 	}
 
 	public void setTipo(TipoCliente tipo) {
-		this.tipo = tipo.getCod(); // Macete feito para transformar o tipo em NUMEROS no caso Integer, logo pro
-									// mundo externo
-									// o que fica é o nome, já no interno fica seu ID!
+		this.tipo = tipo.getCod(); /* Macete feito para transformar o tipo em NUMEROS no caso Integer, logo pro
+									 mundo externo o que fica é o nome, já no interno fica seu ID! */
+
 	}
 
 	public void setEnderecos(List<Endereco> enderecos) {
