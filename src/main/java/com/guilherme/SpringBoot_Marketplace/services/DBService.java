@@ -2,6 +2,7 @@ package com.guilherme.SpringBoot_Marketplace.services;
 
 import com.guilherme.SpringBoot_Marketplace.domain.*;
 import com.guilherme.SpringBoot_Marketplace.domain.enums.EstadoPagamento;
+import com.guilherme.SpringBoot_Marketplace.domain.enums.Perfil;
 import com.guilherme.SpringBoot_Marketplace.domain.enums.TipoCliente;
 import com.guilherme.SpringBoot_Marketplace.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -105,17 +106,25 @@ public class DBService {
         estadoRepository.saveAll(Arrays.asList(est1, est2));
         cidadeRepository.saveAll(Arrays.asList(c1, c2, c3));
 
-        Cliente cli1 = new Cliente(null, "Guilherme Pontes", "guilhermepontes007@gmail.com", "724.487.335-20",
-                TipoCliente.PESSSOA_FISICA, pe.encode("123"));
+        Cliente cli1 = new Cliente(null, "Mark Pontes", " guilhermepontes58@hotmail.com", "724.487.335-20",TipoCliente.PESSSOA_FISICA, pe.encode("123"));
         cli1.getTelefones().addAll(Arrays.asList("98111444", "88895414"));
+
+        Cliente cli2 = new Cliente(null, "Guilherme Pontes", "guilhermepontes007@gmail.com", "232.870.040-34", TipoCliente.PESSSOA_FISICA, pe.encode("123"));
+        cli2.getTelefones().addAll(Arrays.asList("88111444", "78895414"));
+        cli2.addPerfil(Perfil.ADMIN);
+
+
 
         Endereco e1 = new Endereco(null, "Rua Jacaradá", "200", "apt 404", "Alphavile", "78559-217", cli1, c1);
         Endereco e2 = new Endereco(null, "Avenida Paulista", "1800", "apt 8660", "Jardins", "57073-554", cli1, c2);
+        Endereco e3 = new Endereco(null, "Caminho 99", "4", "apt 400", "Mussurunga", "5444-554", cli2, c1);
 
         cli1.getEnderecos().addAll(Arrays.asList(e1, e2));
+        cli2.getEnderecos().addAll(Arrays.asList(e3));
 
-        clienteRepository.saveAll(Arrays.asList(cli1));
-        enderecoRepository.saveAll(Arrays.asList(e1, e2));
+
+        clienteRepository.saveAll(Arrays.asList(cli1, cli2));
+        enderecoRepository.saveAll(Arrays.asList(e1, e2, e3));
         // (MUITO IMPORTANTE), TEM UMA ORDEM A SER SEGUIDA E
         // RESPEITADA NA HORA DE SALVAR AS LISTAS!
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");

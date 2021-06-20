@@ -31,7 +31,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private static final String[] PUBLIC_MATHCHERS_GET = { // ESSE caminho serve para permitir somente a recuperação de dados e não sua modificação
             "/h2-console/**",
             "/produtos/** ",
-            "/categorias/** "
+            "/categorias/** ",
+            "/clientes/**"
     };
     @Override
     protected void configure(HttpSecurity http) throws  Exception {

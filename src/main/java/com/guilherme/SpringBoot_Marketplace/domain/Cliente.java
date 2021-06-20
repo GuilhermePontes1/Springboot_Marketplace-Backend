@@ -1,6 +1,7 @@
 package com.guilherme.SpringBoot_Marketplace.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.guilherme.SpringBoot_Marketplace.domain.enums.Perfil;
 import com.guilherme.SpringBoot_Marketplace.domain.enums.TipoCliente;
 
 import javax.persistence.*;
@@ -8,6 +9,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Entity
 public class Cliente {
@@ -29,8 +31,13 @@ public class Cliente {
 	@OneToMany(mappedBy = "cliente" ,cascade = CascadeType.ALL	)// ex: se eu apagar os clientes apago junto seus endereços, isso se chama efeito "Cascata")
 	private List<Endereco> enderecos = new ArrayList<>();
 
+	@ElementCollection(fetch = FetchType.EAGER) //Quero garantir que sempre que buscar um cliente, automaticamente busque os perfis também!
+	@CollectionTable(name = "PERFIS")
+	private Set<Integer> perfis = new HashSet<>();
+
+
 	@ElementCollection
-	@CollectionTable(name ="telefone")
+	@CollectionTable(name ="TELEFONE")
 	private Set<String> telefones = new HashSet<>(); /*
 														 * optei por criar uma lista de conjunto, já que telefone é
 														 * totalmente dependente de Cliente, logo já evitamos um
@@ -43,6 +50,8 @@ public class Cliente {
 
 	public Cliente() {
 
+		addPerfil(Perfil.CLIENTE);
+
 	}
 
 	public Cliente(Integer id, String nome, String email, String cpfOuCnpj, TipoCliente tipo, String senha) {
@@ -52,9 +61,18 @@ public class Cliente {
 		this.nome = nome;                        
 		this.email = email;
 		this.cpfOuCnpj = cpfOuCnpj;
+		addPerfil(Perfil.CLIENTE);
 		this.tipo = (tipo == null) ? null : tipo.getCod();	/* Macete feito para transformar o tipo em NUMEROS, no caso Integer, logo pro
 															  mundo externo oque fica é o nome, já no interno fica seu ID, por isso esta sendo declarado como
 															  Integer!  */
+	}
+
+	public Set<Perfil> getPerfis() {
+		return perfis.stream().map(x -> Perfil.toEnum(x)).collect(Collectors.toSet()); // retorna os perfis do cliente convertidos para String já que são inicialmente Integers.
+	}
+
+	public void addPerfil(Perfil perfil) {
+		perfis.add(perfil.getCod());  // como o própio nome já diz, adiciona um perfil
 	}
 
 	public String getSenha() {
