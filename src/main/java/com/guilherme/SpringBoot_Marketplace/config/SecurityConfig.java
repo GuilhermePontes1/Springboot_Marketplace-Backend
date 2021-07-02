@@ -2,6 +2,7 @@ package com.guilherme.SpringBoot_Marketplace.config;
 
 
 import com.guilherme.SpringBoot_Marketplace.security.JWTAuthenticationFilter;
+import com.guilherme.SpringBoot_Marketplace.security.JWTAuthorizationFilter;
 import com.guilherme.SpringBoot_Marketplace.security.JWTUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -58,6 +59,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         .anyRequest().authenticated(); // os que não tiverem, peça autenticação
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS); // Assegura que o backend não vai criar sessão de usuário
         http.addFilter(new JWTAuthenticationFilter(authenticationManager(), jwtutil));
+        http.addFilter(new JWTAuthorizationFilter(authenticationManager(), jwtutil, userDetailsService));
+
     }
 
     @Override
