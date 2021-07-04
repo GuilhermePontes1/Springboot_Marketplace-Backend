@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -24,6 +25,7 @@ import java.util.Arrays;
 
 @Configuration
 @EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
@@ -43,7 +45,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             "/h2-console/**",
             "/produtos/** ",
             "/categorias/** ",
+
+    };
+
+    private static final String[] PUBLIC_MATHCHERS_POST = {
             "/clientes/**"
+
     };
     @Override
     protected void configure(HttpSecurity http) throws  Exception {
@@ -54,6 +61,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.cors().and().csrf().disable(); // desabilitando ataques crsf já que o sistema não armazena sessão
         http.authorizeRequests()
+                .antMatchers(HttpMethod.POST, PUBLIC_MATHCHERS_POST).permitAll()
                 .antMatchers(HttpMethod.GET, PUBLIC_MATHCHERS_GET).permitAll() //todos os caminhos que tiveem get serão permitidos( serve para que não seja alterado)
                 .antMatchers(PUBLIC_MATHCHERS).permitAll() //todos os caminhos que tiverem nesse vetor serão permitidos
         .anyRequest().authenticated(); // os que não tiverem, peça autenticação

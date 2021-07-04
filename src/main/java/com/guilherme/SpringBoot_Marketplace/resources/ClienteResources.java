@@ -7,6 +7,7 @@ import com.guilherme.SpringBoot_Marketplace.services.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -38,6 +39,7 @@ public class ClienteResources {
         obj = service.uptade(obj);
         return ResponseEntity.noContent().build(); // Metodo para Atualizar Cliente! = PUT!
     }
+
     @RequestMapping(method = RequestMethod.POST) //RequestBody faz o json ser convertido para objeto java
     public ResponseEntity<Void> insert(@Valid @RequestBody ClienteNewDTO objDto) { //@Valid serve para validação do objeto, para se fazer um filtro do que deve ser colocado
         Cliente obj = service.fromDTO(objDto);
@@ -45,12 +47,13 @@ public class ClienteResources {
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
         return ResponseEntity.created(uri).build();  // metodo para inserir novos clientes! = POST
     }
+    @PreAuthorize("hasAnyRole('ADMIN')") // Serve para definir quem vai poder realizar essa operação, nesse caso somente "ADMIN"
     @RequestMapping(value = "{id}", method = RequestMethod.DELETE)
     public ResponseEntity<Void> delete(@PathVariable Integer id) {
         service.delete(id);
         return ResponseEntity.noContent().build(); // Deletar cliente = DELETE
     }
-
+    @PreAuthorize("hasAnyRole('ADMIN')") // Serve para definir quem vai poder realizar essa operação, nesse caso somente "ADMIN"
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<List<ClienteDTO>> findAll() {
         List<Cliente> list = service.findAll(); // procura TODOS os ids parra ser mostrados todos clientes

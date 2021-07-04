@@ -7,6 +7,7 @@ import com.guilherme.SpringBoot_Marketplace.services.CategoriaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -30,7 +31,7 @@ public class CategoriaResources {
         Categoria obj = service.find(id); // procura o id a ser mostrada
         return ResponseEntity.ok().body(obj);
     }
-
+    @PreAuthorize("hasAnyRole('ADMIN')") // Serve para definir quem vai poder realizar essa operação, nesse caso somente "ADMIN"
     @RequestMapping(method = RequestMethod.POST) //RequestBody faz o json ser convertido para objeto java
     public ResponseEntity<Void> insert(@Valid @RequestBody CategoriaDTO objDto) { //@Valid serve para validação do objeto, para se fazer um filtro do que deve ser colocado
         Categoria obj = service.fromDTO(objDto);
@@ -38,7 +39,7 @@ public class CategoriaResources {
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
         return ResponseEntity.created(uri).build();  // metodo para inserir novas categoria! = POST
     }
-
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     public ResponseEntity<?> uptade(@Valid @RequestBody CategoriaDTO objDto, @PathVariable Integer id) {
       Categoria obj = service.fromDTO(objDto);
@@ -46,7 +47,7 @@ public class CategoriaResources {
         obj = service.uptade(obj);
         return ResponseEntity.noContent().build(); // Metodo para Atualizar Categoria! = PUT!
     }
-
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @RequestMapping(value = "{id}", method = RequestMethod.DELETE)
     public ResponseEntity<Void> delete(@PathVariable Integer id) {
         service.delete(id);
