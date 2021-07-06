@@ -69,4 +69,9 @@ public class UserSS implements UserDetails {    //  "Contrato" com usuário onde
     public boolean isEnabled() {
         return true;
     }
+
+    public boolean hasRole(Perfil perfil) {
+        return getAuthorities().contains(new SimpleGrantedAuthority(perfil.getDescricao())); // testa se esse usuário possui um perfil
+    }
+
 }

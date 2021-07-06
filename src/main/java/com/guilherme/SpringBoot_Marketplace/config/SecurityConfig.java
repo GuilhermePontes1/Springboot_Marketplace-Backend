@@ -66,7 +66,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(PUBLIC_MATHCHERS).permitAll() //todos os caminhos que tiverem nesse vetor serão permitidos
         .anyRequest().authenticated(); // os que não tiverem, peça autenticação
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS); // Assegura que o backend não vai criar sessão de usuário
-        http.addFilter(new JWTAuthenticationFilter(authenticationManager(), jwtutil));
+        http.addFilter(new JWTAuthenticationFilter(authenticationManager(), jwtutil)); // adicionar filtros
         http.addFilter(new JWTAuthorizationFilter(authenticationManager(), jwtutil, userDetailsService));
 
     }

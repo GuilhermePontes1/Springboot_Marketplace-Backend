@@ -3,6 +3,7 @@ package com.guilherme.SpringBoot_Marketplace.services;
 import java.util.List;
 import java.util.Optional;
 
+import com.guilherme.SpringBoot_Marketplace.domain.enums.Perfil;
 import com.guilherme.SpringBoot_Marketplace.dto.ClienteDTO;
 import com.guilherme.SpringBoot_Marketplace.dto.ClienteNewDTO;
 import com.guilherme.SpringBoot_Marketplace.domain.Cidade;
@@ -10,7 +11,10 @@ import com.guilherme.SpringBoot_Marketplace.domain.Cliente;
 import com.guilherme.SpringBoot_Marketplace.domain.Endereco;
 import com.guilherme.SpringBoot_Marketplace.domain.enums.TipoCliente;
 import com.guilherme.SpringBoot_Marketplace.repositories.EnderecoRepository;
+import com.guilherme.SpringBoot_Marketplace.security.UserSS;
+import com.guilherme.SpringBoot_Marketplace.services.exception.AuthorizationException;
 import com.guilherme.SpringBoot_Marketplace.services.exception.DataIntegrityException;
+import org.apache.tomcat.websocket.AuthenticationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
@@ -35,6 +39,12 @@ public class ClienteService {
 	private BCryptPasswordEncoder pe;
 
 	public Cliente find(Integer id) {
+
+		UserSS user = UserService.authenticated();
+		if (user == null || !user.hasRole(Perfil.ADMIN) && !id.equals(user.getId())) {
+			throw new AuthorizationException("Acesso negado");
+		}
+
 		Optional<Cliente> obj = repo.findById(id);
 		return obj.orElseThrow(() -> 
 		new ObjectNotFoundException("Objeto não encontrado! Id: " + id + ", Tipo: " + Cliente.class.getName()));
