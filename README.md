@@ -27,7 +27,7 @@ https://spring-marketplace.herokuapp.com/ local onde se localiza o backend da ap
    Serviços de email! :white_check_mark:
    
  ### 7º UPDATE: 
-   Autenticação e autorização com tokens JWT com Spring Securty (Estou nessa etapa!) :construction:
+   Autenticação e autorização com tokens JWT com Spring Security (Estou nessa etapa!) :construction:
    
  ### 8º UPDATE: 
    Armazenamento de imagem com Amazon S3
