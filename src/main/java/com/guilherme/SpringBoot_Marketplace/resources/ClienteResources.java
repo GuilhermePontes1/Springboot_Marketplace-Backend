@@ -47,7 +47,7 @@ public class ClienteResources {
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
         return ResponseEntity.created(uri).build();  // metodo para inserir novos clientes! = POST
     }
-    @PreAuthorize("hasAnyRole('ADMIN')") // Serve para definir quem vai poder realizar essa operação, nesse caso somente "ADMIN"
+    @PreAuthorize("hasAnyRole('ADMIN')")    // Serve para definir quem vai poder realizar essa operação, nesse caso somente "ADMIN"
     @RequestMapping(value = "{id}", method = RequestMethod.DELETE)
     public ResponseEntity<Void> delete(@PathVariable Integer id) {
         service.delete(id);
