@@ -1,5 +1,6 @@
 package com.guilherme.SpringBoot_Marketplace.services;
 
+import com.guilherme.SpringBoot_Marketplace.domain.Cliente;
 import com.guilherme.SpringBoot_Marketplace.domain.Pedido;
 import org.springframework.mail.SimpleMailMessage;
 
@@ -13,4 +14,6 @@ public interface EmailService {
     void sendOrderConfirmationHtmlEmail(Pedido obj);
 
     void sendHtmlEmail(MimeMessage msg);
+
+    void sendNewPasswordEmail(Cliente cliente, String newPass);
 }

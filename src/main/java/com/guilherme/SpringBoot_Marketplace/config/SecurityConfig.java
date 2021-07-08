@@ -49,7 +49,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     };
 
     private static final String[] PUBLIC_MATHCHERS_POST = {
-            "/clientes/**"
+            "/clientes/**",
+            "/auth/forgot/**"
 
     };
     @Override
@@ -65,9 +66,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.GET, PUBLIC_MATHCHERS_GET).permitAll() //todos os caminhos que tiveem get serão permitidos( serve para que não seja alterado)
                 .antMatchers(PUBLIC_MATHCHERS).permitAll() //todos os caminhos que tiverem nesse vetor serão permitidos
         .anyRequest().authenticated(); // os que não tiverem, peça autenticação
-        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS); // Assegura que o backend não vai criar sessão de usuário
         http.addFilter(new JWTAuthenticationFilter(authenticationManager(), jwtutil)); // adicionar filtros
         http.addFilter(new JWTAuthorizationFilter(authenticationManager(), jwtutil, userDetailsService));
+        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS); // Assegura que o backend não vai criar sessão de usuário
 
     }
 
