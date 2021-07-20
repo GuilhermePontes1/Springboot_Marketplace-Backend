@@ -1,5 +1,6 @@
 package com.guilherme.SpringBoot_Marketplace.services;
 	
+import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,7 +15,6 @@ import com.guilherme.SpringBoot_Marketplace.repositories.EnderecoRepository;
 import com.guilherme.SpringBoot_Marketplace.security.UserSS;
 import com.guilherme.SpringBoot_Marketplace.services.exception.AuthorizationException;
 import com.guilherme.SpringBoot_Marketplace.services.exception.DataIntegrityException;
-import org.apache.tomcat.websocket.AuthenticationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
@@ -25,6 +25,7 @@ import org.springframework.stereotype.Service;
 import com.guilherme.SpringBoot_Marketplace.repositories.ClienteRepository;
 import com.guilherme.SpringBoot_Marketplace.services.exception.ObjectNotFoundException;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 @Service
 public class ClienteService {
@@ -37,6 +38,9 @@ public class ClienteService {
 
 	@Autowired
 	private BCryptPasswordEncoder pe;
+
+	@Autowired
+	private S3Service s3Service;
 
 	public Cliente find(Integer id) {
 
@@ -101,11 +105,14 @@ public class ClienteService {
 		return  cli;
 	}
 
-
-
 	private void uptadeData(Cliente newObj, Cliente obj) {
 		newObj.setNome(obj.getNome());
 		newObj.setEmail(obj.getEmail()); // atualiza para novos valores e busca conforme o usuário
+	}
+
+	public URI uplooadProfilePicture(MultipartFile multipartFile) {
+
+		return s3Service.uploadFile(multipartFile); // envia imagem do cliente para s3awsc
 	}
 }
 

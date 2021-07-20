@@ -9,16 +9,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class SpringBoot_Marketplace implements CommandLineRunner {
 
-	@Autowired
-	private S3Service s3Service;
-
 	public static void main(String[] args) {
 		SpringApplication.run(SpringBoot_Marketplace.class, args);
 	}
 
 	@Override
 	public void run(String... args) throws Exception {
-	s3Service.uploadFile("C:\\Users\\Guilh\\Desktop\\Arquivos Pessoais\\Guilherme.png");
 
 	}
 }

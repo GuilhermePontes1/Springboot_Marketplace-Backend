@@ -9,6 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
@@ -47,13 +48,17 @@ public class ClienteResources {
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
         return ResponseEntity.created(uri).build();  // metodo para inserir novos clientes! = POST
     }
-    @PreAuthorize("hasAnyRole('ADMIN')")    // Serve para definir quem vai poder realizar essa operação, nesse caso somente "ADMIN"
+
+    @PreAuthorize("hasAnyRole('ADMIN')")
+    // Serve para definir quem vai poder realizar essa operação, nesse caso somente "ADMIN"
     @RequestMapping(value = "{id}", method = RequestMethod.DELETE)
     public ResponseEntity<Void> delete(@PathVariable Integer id) {
         service.delete(id);
         return ResponseEntity.noContent().build(); // Deletar cliente = DELETE
     }
-    @PreAuthorize("hasAnyRole('ADMIN')") // Serve para definir quem vai poder realizar essa operação, nesse caso somente "ADMIN"
+
+    @PreAuthorize("hasAnyRole('ADMIN')")
+    // Serve para definir quem vai poder realizar essa operação, nesse caso somente "ADMIN"
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<List<ClienteDTO>> findAll() {
         List<Cliente> list = service.findAll(); // procura TODOS os ids parra ser mostrados todos clientes
@@ -65,13 +70,20 @@ public class ClienteResources {
 
     @RequestMapping(value = "/page", method = RequestMethod.GET)
     public ResponseEntity<Page<ClienteDTO>> findPage(@RequestParam(value = "page", defaultValue = "0") Integer page,
-                                                       @RequestParam(value = "linesPerPage", defaultValue = "24") Integer linesPerPage,
-                                                       @RequestParam(value = "orderBy", defaultValue = "nome") String orderBy,
-                                                       @RequestParam(value = "direction", defaultValue = "ASC") String direction) {
+                                                     @RequestParam(value = "linesPerPage", defaultValue = "24") Integer linesPerPage,
+                                                     @RequestParam(value = "orderBy", defaultValue = "nome") String orderBy,
+                                                     @RequestParam(value = "direction", defaultValue = "ASC") String direction) {
         // Este metodo acima organiza a forma que as paginas vão ser organizadas
         Page<Cliente> list = service.findPage(page, linesPerPage, orderBy, direction);
         Page<ClienteDTO> listDto = list.map(obj -> new ClienteDTO(obj)); // fazendo a transição para lista DTO que será a visualizada pelo usuário
         return ResponseEntity.ok().body(listDto);
+    }
+
+    @RequestMapping(value = "/picture", method = RequestMethod.POST) // metodo para enviarr imagem para clientes service
+    public ResponseEntity<Void> uploadProfilePicture(@RequestParam(name = "file") MultipartFile file) {
+        URI uri = service.uplooadProfilePicture(file);
+        return ResponseEntity.created(uri).build();
+
     }
 }
 
