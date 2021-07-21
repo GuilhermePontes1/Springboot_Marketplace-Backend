@@ -50,7 +50,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private static final String[] PUBLIC_MATHCHERS_POST = {
             "/clientes/",
-            "/clientes/picture", // acesso provisório
             "/auth/forgot/**"
 
     };
