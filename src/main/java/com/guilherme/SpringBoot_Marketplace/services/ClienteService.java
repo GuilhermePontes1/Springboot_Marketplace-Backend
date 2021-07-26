@@ -1,5 +1,6 @@
 package com.guilherme.SpringBoot_Marketplace.services;
-	
+
+import java.awt.image.BufferedImage;
 import java.net.URI;
 import java.util.List;
 import java.util.Optional;
@@ -16,6 +17,7 @@ import com.guilherme.SpringBoot_Marketplace.security.UserSS;
 import com.guilherme.SpringBoot_Marketplace.services.exception.AuthorizationException;
 import com.guilherme.SpringBoot_Marketplace.services.exception.DataIntegrityException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -30,99 +32,115 @@ import org.springframework.web.multipart.MultipartFile;
 @Service
 public class ClienteService {
 
-	@Autowired
-	private ClienteRepository repo;
+    @Autowired
+    private ClienteRepository repo;
 
-	@Autowired
-	private EnderecoRepository enderecoRepository;
+    @Autowired
+    private EnderecoRepository enderecoRepository;
 
-	@Autowired
-	private BCryptPasswordEncoder pe;
+    @Autowired
+    private BCryptPasswordEncoder pe;
 
-	@Autowired
-	private S3Service s3Service;
+    @Autowired
+    private S3Service s3Service;
 
-	public Cliente find(Integer id) {
+    @Autowired
+    private ImageService imageService;
 
-		UserSS user = UserService.authenticated();
-		if (user == null || !user.hasRole(Perfil.ADMIN) && !id.equals(user.getId())) {
-			throw new AuthorizationException("Acesso negado");
-		}
+    @Value("${img.prefix.client.profile}")
+    private String prefix;
 
-		Optional<Cliente> obj = repo.findById(id);
-		return obj.orElseThrow(() -> 
-		new ObjectNotFoundException("Objeto não encontrado! Id: " + id + ", Tipo: " + Cliente.class.getName()));
+    @Value("${img.profile.size}")
+    private Integer size;
 
 
-	}
-	@Transactional// garantia de que será salvo endereço e cliente na mesma transação no banco de dados.
-	public Cliente insert(Cliente obj) {
-		obj.setId(null);
-		obj = repo.save(obj);
-		enderecoRepository.saveAll(obj.getEnderecos());
-		return obj; // Faz parte do metodo para inserir um novo cliente junto com endereço
+    public Cliente find(Integer id) {
 
-	}
+        UserSS user = UserService.authenticated();
+        if (user == null || !user.hasRole(Perfil.ADMIN) && !id.equals(user.getId())) {
+            throw new AuthorizationException("Acesso negado");
+        }
 
-	public Cliente uptade(Cliente obj) {
-		Cliente newObj =  find(obj.getId());
-		uptadeData(newObj, obj);
-		return repo.save(newObj); // Diferença fica na questão do id, quando ele se encontra nulo insere, quando não Atualiza os dados.
-	}
+        Optional<Cliente> obj = repo.findById(id);
+        return obj.orElseThrow(() ->
+                new ObjectNotFoundException("Objeto não encontrado! Id: " + id + ", Tipo: " + Cliente.class.getName()));
 
-	public void delete(Integer id) {
-		find(id);
-		try {
-			repo.deleteById(id);
-		} catch (DataIntegrityViolationException e) {
-			throw new DataIntegrityException("Não é possível exclui pois a pedidos relacionados");
-		}
-	}public List<Cliente> findAll() {
-		return repo.findAll(); // Metodo para listar todas categorias!
-	}
 
-	public Page<Cliente> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {
-		PageRequest pageRequest = PageRequest.of(page,linesPerPage, Sort.Direction.valueOf(direction),orderBy);
-		return repo.findAll(pageRequest);
-		// Filtra as categorias de acordo com o usuário. Essa função funciona através do uso do Page, que faz a paginação
-		// funcionalidade adicionada do Spring
-	}
-	public Cliente fromDTO(ClienteDTO objDto) {
-		return new Cliente(objDto.getId(), objDto.getNome(), objDto.getEmail(), null, null, null);
-	}
-		public Cliente fromDTO(ClienteNewDTO objDto) {
-			Cliente cli = new Cliente(null, objDto.getNome(), objDto.getEmail(), objDto.getCpfOuCnpj(), TipoCliente.toEnum(objDto.getTipo()), pe.encode(objDto.getSenha()));
-			Cidade cid = new Cidade(objDto.getCidadeId(),null,null);
-			Endereco end = new Endereco(null, objDto.getLogradouro(), objDto.getNumero(), objDto.getComplemento(), objDto.getBairro(),objDto.getCep(),cli, cid);
-			cli.getEnderecos().add(end);
-			cli.getTelefones().add(objDto.getTelefone1());
-			if (objDto.getTelefone2() != null) {
-				cli.getTelefones().add(objDto.getTelefone2());
-			}
-			if (objDto.getTelefone3() != null) {
-				cli.getTelefones().add(objDto.getTelefone3());
-			}
-		return  cli;
-	}
+    }
 
-	private void uptadeData(Cliente newObj, Cliente obj) {
-		newObj.setNome(obj.getNome());
-		newObj.setEmail(obj.getEmail()); // atualiza para novos valores e busca conforme o usuário
-	}
+    @Transactional// garantia de que será salvo endereço e cliente na mesma transação no banco de dados.
+    public Cliente insert(Cliente obj) {
+        obj.setId(null);
+        obj = repo.save(obj);
+        enderecoRepository.saveAll(obj.getEnderecos());
+        return obj; // Faz parte do metodo para inserir um novo cliente junto com endereço
 
-	public URI uplooadProfilePicture(MultipartFile multipartFile) {
-		UserSS user = UserService.authenticated();
-		if (user == null) {
-			throw new AuthorizationException("Acesso negado");
-		}
-		URI uri = s3Service.uploadFile(multipartFile); // envia imagem do cliente para s3awsc
+    }
 
-		Cliente cli = find(user.getId());
-		cli.setImageUrl(uri.toString());
-		repo.save(cli);
+    public Cliente uptade(Cliente obj) {
+        Cliente newObj = find(obj.getId());
+        uptadeData(newObj, obj);
+        return repo.save(newObj); // Diferença fica na questão do id, quando ele se encontra nulo insere, quando não Atualiza os dados.
+    }
 
-		return uri;
-	}
+    public void delete(Integer id) {
+        find(id);
+        try {
+            repo.deleteById(id);
+        } catch (DataIntegrityViolationException e) {
+            throw new DataIntegrityException("Não é possível exclui pois a pedidos relacionados");
+        }
+    }
+
+    public List<Cliente> findAll() {
+        return repo.findAll(); // Metodo para listar todas categorias!
+    }
+
+    public Page<Cliente> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {
+        PageRequest pageRequest = PageRequest.of(page, linesPerPage, Sort.Direction.valueOf(direction), orderBy);
+        return repo.findAll(pageRequest);
+        // Filtra as categorias de acordo com o usuário. Essa função funciona através do uso do Page, que faz a paginação
+        // funcionalidade adicionada do Spring
+    }
+
+    public Cliente fromDTO(ClienteDTO objDto) {
+        return new Cliente(objDto.getId(), objDto.getNome(), objDto.getEmail(), null, null, null);
+    }
+
+    public Cliente fromDTO(ClienteNewDTO objDto) {
+        Cliente cli = new Cliente(null, objDto.getNome(), objDto.getEmail(), objDto.getCpfOuCnpj(), TipoCliente.toEnum(objDto.getTipo()), pe.encode(objDto.getSenha()));
+        Cidade cid = new Cidade(objDto.getCidadeId(), null, null);
+        Endereco end = new Endereco(null, objDto.getLogradouro(), objDto.getNumero(), objDto.getComplemento(), objDto.getBairro(), objDto.getCep(), cli, cid);
+        cli.getEnderecos().add(end);
+        cli.getTelefones().add(objDto.getTelefone1());
+        if (objDto.getTelefone2() != null) {
+            cli.getTelefones().add(objDto.getTelefone2());
+        }
+        if (objDto.getTelefone3() != null) {
+            cli.getTelefones().add(objDto.getTelefone3());
+        }
+        return cli;
+    }
+
+    private void uptadeData(Cliente newObj, Cliente obj) {
+        newObj.setNome(obj.getNome());
+        newObj.setEmail(obj.getEmail()); // atualiza para novos valores e busca conforme o usuário
+    }
+
+    public URI uplooadProfilePicture(MultipartFile multipartFile) {
+        UserSS user = UserService.authenticated(); // verifica se o cliente está logado
+        if (user == null) {
+            throw new AuthorizationException("Acesso negado");
+        }
+        BufferedImage jpgImage = imageService.getJpgImageFromFile(multipartFile);
+        jpgImage = imageService.cropSquare(jpgImage);
+        jpgImage = imageService.resize(jpgImage, size);
+
+        String fileName = prefix + user.getId() + ".jpg";
+
+        return s3Service.uploadFile(imageService.getInputStream(jpgImage, "jpg"), fileName, "image");
+
+    }
 }
 
 
