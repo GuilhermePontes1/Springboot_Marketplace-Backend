@@ -30,6 +30,7 @@ public class AuthResource {
         UserSS user = UserService.authenticated(); // aqui pega o usuário logado
         String token = jwtUtil.generateToken(user.getUsername()); // então é gerado um novo token com o usuário logado
         response.addHeader("Authorization", "Bearer " + token); // adiciona o token na resposta da requisição
+        response.addHeader("access-control-expose-headers", "Authorization");
         return ResponseEntity.noContent().build();
     }
     @RequestMapping(value = "/forgot", method = RequestMethod.POST)
