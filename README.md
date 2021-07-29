@@ -30,10 +30,11 @@ https://spring-marketplace.herokuapp.com/ local onde se localiza o backend da ap
    Autenticação e autorização com tokens JWT com Spring Security :white_check_mark:
    
  ### 8º UPDATE: 
-   Armazenamento de imagem com Amazon S3 (Estou nessa etapa!) :construction:
+   Armazenamento de imagem com Amazon S3 (Estou nessa etapa!) :white_check_mark:
+#### 8.1: Correções Bugs e ajustes finais no backend e bucket (Estou nessa etapa!) :construction:
    
  ### 9º UPDATE: 
-   Para o front-end utilizarei IONIC, para que a loja seja também implementando em dispositivos movéis
+   Para o front-end utilizarei IONIC, para que a loja seja também implementando em dispositivos movéis 
    
    ## DIAGRAMA DO PROJETO
 ![image](https://user-images.githubusercontent.com/65747791/120947499-23471100-c716-11eb-828e-158f6224103d.png)
