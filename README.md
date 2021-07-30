@@ -30,7 +30,7 @@ https://spring-marketplace.herokuapp.com/ local onde se localiza o backend da ap
    Autenticação e autorização com tokens JWT com Spring Security :white_check_mark:
    
  ### 8º UPDATE: 
-   Armazenamento de imagem com Amazon S3 (Estou nessa etapa!) :white_check_mark:
+   Armazenamento de imagem com Amazon S3  :white_check_mark:
 #### 8.1: Correções Bugs e ajustes finais no backend e bucket (Estou nessa etapa!) :construction:
    
  ### 9º UPDATE: 
