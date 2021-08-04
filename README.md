@@ -31,7 +31,7 @@ https://spring-marketplace.herokuapp.com/ local onde se localiza o backend da ap
    
  ### 8º UPDATE: 
    Armazenamento de imagem com Amazon S3  :white_check_mark:
-#### 8.1: Correções Bugs e ajustes finais no backend e bucket 
+#### 8.1: Correções Bugs e ajustes finais no backend e bucket :white_check_mark:
    
  ### 9º UPDATE: 
    Para o front-end utilizarei IONIC, para que a loja seja também implementando em dispositivos movéis (Estou nessa etapa!) :construction:
