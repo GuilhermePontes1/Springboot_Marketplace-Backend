@@ -30,7 +30,7 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
                                     FilterChain chain) throws IOException, ServletException { // Execulta algo antes da requisição continuar
 
         String header = request.getHeader("Authorization");
-        if (header != null && header.startsWith("Bearer ")) {
+        if (header != null && header.startsWith("Bearer ")) {  // captura o token para utilização futura
             UsernamePasswordAuthenticationToken auth = getAuthentication(header.substring(7));
             if (auth != null) {
                 SecurityContextHolder.getContext().setAuthentication(auth);
