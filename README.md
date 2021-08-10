@@ -34,7 +34,8 @@ https://spring-marketplace.herokuapp.com/ local onde se localiza o backend da ap
 #### 8.1: Correções Bugs e ajustes finais no backend e bucket :white_check_mark:
    
  ### 9º UPDATE: 
-   Para o front-end utilizarei IONIC, para que a loja seja também implementando em dispositivos movéis (Estou nessa etapa!) :construction:
+   Para o front-end utilizarei IONIC, para que a loja seja também implementando em dispositivos movéis (Estou nessa etapa!) :construction: 
+    Link para repositório frontend ->  https://github.com/GuilhermePontes1/Springboot_Marketplace-Frontend
    
    ## DIAGRAMA DO PROJETO
 ![image](https://user-images.githubusercontent.com/65747791/120947499-23471100-c716-11eb-828e-158f6224103d.png)
