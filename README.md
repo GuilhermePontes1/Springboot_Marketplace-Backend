@@ -1,4 +1,10 @@
-# <p align = center> Springboot Marketplace <img align = "center" height = "60" width = "60" src="https://w7.pngwing.com/pngs/483/177/png-transparent-gear-train-others-miscellaneous-logo-mechanics-thumbnail.png">(API FINALIZADA) </p>
+# <p align = center> Springboot Marketplace (Back-end) </p> <p align = "center"> <img align = center src="https://user-images.githubusercontent.com/65747791/129111034-f5d3de84-bc9c-4ed3-9269-a90424e138da.png" height = "120" width="120"> </p>
+
+
+
+
+
+
 ### 1º ETAPA: 
 Criando um Marketplace em Java através do Spring Boot e diversas tecnologias, irei atualizando o readme sobre as tecnologias utilizadas durante a construção do projeto :white_check_mark:	
 
