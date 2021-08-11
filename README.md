@@ -1,5 +1,5 @@
-# Springboot_Marketplace API FINALIZADA
-### 1º UPDATE: 
+# <p align = center> Springboot Marketplace <img align = "center" height = "60" width = "60" src="https://w7.pngwing.com/pngs/483/177/png-transparent-gear-train-others-miscellaneous-logo-mechanics-thumbnail.png">(API FINALIZADA) </p>
+### 1º ETAPA: 
 Criando um Marketplace em Java através do Spring Boot e diversas tecnologias, irei atualizando o readme sobre as tecnologias utilizadas durante a construção do projeto :white_check_mark:	
 
 ### 2º UPDATE: 
