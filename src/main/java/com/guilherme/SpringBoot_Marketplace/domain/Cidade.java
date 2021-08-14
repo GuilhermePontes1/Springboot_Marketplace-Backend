@@ -13,8 +13,7 @@ public class Cidade implements Serializable {
 	private String nome;
 
 
-	@ManyToOne // auxiliar o banco de dados, nesse caso temos varias (many) cidade para um
-				// estado (one)
+	@ManyToOne // auxiliar o banco de dados, nesse caso temos varias (many) cidade para um | estado (one)
 	@JoinColumn(name = "estado_id")
 	private Estado estado;
 
