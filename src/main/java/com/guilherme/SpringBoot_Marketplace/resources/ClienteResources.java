@@ -55,16 +55,14 @@ public class ClienteResources {
         return ResponseEntity.created(uri).build();  // metodo para inserir novos clientes! = POST
     }
 
-    @PreAuthorize("hasAnyRole('ADMIN')")
-    // Serve para definir quem vai poder realizar essa operação, nesse caso somente "ADMIN"
+    @PreAuthorize("hasAnyRole('ADMIN')")    // Serve para definir quem vai poder realizar essa operação, nesse caso somente "ADMIN"
     @RequestMapping(value = "{id}", method = RequestMethod.DELETE)
     public ResponseEntity<Void> delete(@PathVariable Integer id) {
         service.delete(id);
         return ResponseEntity.noContent().build(); // Deletar cliente = DELETE
     }
 
-    @PreAuthorize("hasAnyRole('ADMIN')")
-    // Serve para definir quem vai poder realizar essa operação, nesse caso somente "ADMIN"
+    @PreAuthorize("hasAnyRole('ADMIN')") // Serve para definir quem vai poder realizar essa operação, nesse caso somente "ADMIN"
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<List<ClienteDTO>> findAll() {
         List<Cliente> list = service.findAll(); // procura TODOS os ids parra ser mostrados todos clientes

@@ -24,13 +24,11 @@ public class CategoriaResources {
     private CategoriaService service;
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-
-
     public ResponseEntity<Categoria> find(@PathVariable Integer id) {
-
         Categoria obj = service.find(id); // procura o id a ser mostrada
         return ResponseEntity.ok().body(obj);
     }
+
     @PreAuthorize("hasAnyRole('ADMIN')") // Serve para definir quem vai poder realizar essa operação, nesse caso somente "ADMIN"
     @RequestMapping(method = RequestMethod.POST) //RequestBody faz o json ser convertido para objeto java
     public ResponseEntity<Void> insert(@Valid @RequestBody CategoriaDTO objDto) { //@Valid serve para validação do objeto, para se fazer um filtro do que deve ser colocado
