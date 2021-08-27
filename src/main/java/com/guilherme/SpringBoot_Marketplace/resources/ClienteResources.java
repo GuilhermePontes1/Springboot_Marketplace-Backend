@@ -25,10 +25,7 @@ public class ClienteResources {
     private ClienteService service;
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-
-
     public ResponseEntity<Cliente> find(@PathVariable Integer id) {
-
         Cliente obj = service.find(id); // procura o id a ser mostrada
         return ResponseEntity.ok().body(obj);
     }
@@ -39,20 +36,20 @@ public class ClienteResources {
         return ResponseEntity.ok().body(obj);
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-    public ResponseEntity<?> uptade(@Valid @RequestBody ClienteDTO objDto, @PathVariable Integer id) {
-        Cliente obj = service.fromDTO(objDto);
-        obj.setId(id);
-        obj = service.uptade(obj);
-        return ResponseEntity.noContent().build(); // Metodo para Atualizar Cliente! = PUT!
-    }
-
     @RequestMapping(method = RequestMethod.POST) //RequestBody faz o json ser convertido para objeto java
     public ResponseEntity<Void> insert(@Valid @RequestBody ClienteNewDTO objDto) { //@Valid serve para validação do objeto, para se fazer um filtro do que deve ser colocado
         Cliente obj = service.fromDTO(objDto);
         obj = service.insert(obj);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
         return ResponseEntity.created(uri).build();  // metodo para inserir novos clientes! = POST
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+    public ResponseEntity<?> uptade(@Valid @RequestBody ClienteDTO objDto, @PathVariable Integer id) {
+        Cliente obj = service.fromDTO(objDto);
+        obj.setId(id);
+        obj = service.uptade(obj);
+        return ResponseEntity.noContent().build(); // Metodo para Atualizar Cliente! = PUT!
     }
 
     @PreAuthorize("hasAnyRole('ADMIN')")    // Serve para definir quem vai poder realizar essa operação, nesse caso somente "ADMIN"
@@ -65,13 +62,14 @@ public class ClienteResources {
     @PreAuthorize("hasAnyRole('ADMIN')") // Serve para definir quem vai poder realizar essa operação, nesse caso somente "ADMIN"
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<List<ClienteDTO>> findAll() {
-        List<Cliente> list = service.findAll(); // procura TODOS os ids parra ser mostrados todos clientes
+        List<Cliente> list = service.findAll(); // procura TODOS os ids para ser mostrados todos clientes
         List<ClienteDTO> listDto = list.stream().map(obj -> new ClienteDTO(obj)).collect(Collectors.toList());
         // Converte a lista cliente para clienteDto, isso serve para limitar o que  categoria mostra apenas a ela mesma
         // e não a categoria e produtos que nesse caso seria errado devido o requisitos do projeto
         return ResponseEntity.ok().body(listDto);
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @RequestMapping(value = "/page", method = RequestMethod.GET)
     public ResponseEntity<Page<ClienteDTO>> findPage(@RequestParam(value = "page", defaultValue = "0") Integer page,
                                                      @RequestParam(value = "linesPerPage", defaultValue = "24") Integer linesPerPage,
