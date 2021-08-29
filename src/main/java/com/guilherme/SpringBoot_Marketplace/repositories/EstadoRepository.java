@@ -9,8 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.guilherme.SpringBoot_Marketplace.domain.Estado;
 import org.springframework.transaction.annotation.Transactional;
 
-@Repository // REALIZA OPERAÇÃO DE ACESSO A DADOS REFERENTE AO OBJETO CATEGORIA QUE ESTÁ REFERENCIADO COM OBJETO
-//CATEGORIA
+@Repository // REALIZA OPERAÇÃO DE ACESSO A DADOS REFERENTE AO OBJETO CATEGORIA QUE ESTÁ REFERENCIADO COM OBJETO CATEGORIA
 public interface EstadoRepository extends JpaRepository<Estado, Integer> { 
 
     @Transactional(readOnly = true)
