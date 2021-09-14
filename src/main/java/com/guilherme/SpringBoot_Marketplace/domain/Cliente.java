@@ -5,6 +5,7 @@ import com.guilherme.SpringBoot_Marketplace.domain.enums.Perfil;
 import com.guilherme.SpringBoot_Marketplace.domain.enums.TipoCliente;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -12,10 +13,12 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Entity
-public class Cliente {
+public class Cliente implements Serializable {
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+
 	private Integer id;
 	private String nome;
 

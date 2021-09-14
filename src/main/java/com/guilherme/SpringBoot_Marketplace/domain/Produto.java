@@ -11,7 +11,6 @@ import java.util.Set;
 
 @Entity
 public class Produto implements Serializable {
-
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -46,7 +45,7 @@ public class Produto implements Serializable {
 		this.nome = nome;
 		this.preco = preco;
 	}
-	@JsonIgnore // Vai ter uma referencia ciclica por isso precisa ser ignorado
+	@JsonIgnore 							// Vai ter uma referencia ciclica por isso precisa ser ignorado
 	public List<Pedido> getPedidos (){       // Um produto deve conhecer os pediddos dele, por isso ele varre a lista de intes
 	List<Pedido> lista = new ArrayList<>();		// e então associa a pedidos
 		for (ItemPedido x: itens) {
